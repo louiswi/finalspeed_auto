@@ -1,2 +1,2 @@
 # fs_auto
-* * * * * root /cron/fs_auto.sh
+    * * * * * root /cron/fs_auto.sh
