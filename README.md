@@ -1,2 +1,2 @@
 # fs_auto
-    * * * * * root /cron/fs_auto.sh
+   echo '* * * * * root /path/to/your/fs_auto.sh' >> /etc/crontab
