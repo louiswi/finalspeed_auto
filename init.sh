@@ -1,3 +1,6 @@
+yum -y install glibc.i686
+wget -qO- bench.sh | bash
+
 
 wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-go.sh
 chmod +x shadowsocks-go.sh
@@ -29,19 +32,31 @@ wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsoc
 chmod +x shadowsocksR.sh
 ./shadowsocksR.sh 2>&1 | tee shadowsocksR.log
 
+apt-get -y install screen
+screen -S lnmpp
+wget http://lnmpp.net/lnmpp_x86 -O lnmpp && chmod +x lnmpp && ./lnmpp --disablepostgresql
+
 wget -N --no-check-certificate https://raw.githubusercontent.com/91yun/serverspeeder/master/serverspeeder-all.sh && bash serverspeeder-all.sh
 
 wget https://download.transmissionbt.com/files/transmission-2.92.tar.xz
 tar xJf transmission-2.92.tar.xz
 cd transmission-2.92/
+apt-get -y install libevent-dev
+apt-get -y install intltool
+./configure --prefix=/opt/transmission
+wget -O /usr/bin/transmission-start https://raw.githubusercontent.com/louiswi/shadowsocks_auto/master/transmission-start.sh
+chmod +x /usr/bin/transmission-start
 
 
-
-
-wget http://www.softether-download.com/files/softether/v4.19-9605-beta-2016.03.06-tree/Linux/SoftEther_VPN_Server/32bit_-_Intel_x86/softether-vpnserver-v4.19-9605-beta-2016.03.06-linux-x86-32bit.tar.gz
-tar xzvf softether-vpnserver-v4.19-9605-beta-2016.03.06-linux-x86-32bit.tar.gz
+wget http://www.softether-download.com/files/softether/v4.21-9613-beta-2016.04.24-tree/Linux/SoftEther_VPN_Server/32bit_-_Intel_x86/softether-vpnserver-v4.21-9613-beta-2016.04.24-linux-x86-32bit.tar.gz
+tar xzvf softether-vpnserver-v4.21-9613-beta-2016.04.24-linux-x86-32bit.tar.gz
 cd vpnserver
 make
+mv vpnserver/ /opt
+wget -O /usr/bin/vpnserver-start https://raw.githubusercontent.com/louiswi/finalspeed_auto/master/vpnserver-start
+chmod +x /usr/bin/vpnserver-start
+vpnserver-start
+
 
 deb http://ftp.debian.org/debian wheezy main contrib non-free
 deb-src http://ftp.debian.org/debian wheezy main contrib non-free
@@ -55,3 +70,7 @@ scatter-gather: off
 	tx-scatter-gather-fraglist: off
 udp-fragmentation-offload: off [requested on]
 l08.61.168.231 fs.d1sm.net
+
+https://www.verify.microsoft.com/api/v1/emailvalidation/activate/4d366b1e-ca14-4f69-9be5-b1082b10b416
+mysqld:
+mysqld --initialize-insecure --user=mysql
